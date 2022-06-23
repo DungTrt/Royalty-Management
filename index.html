@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="./assets/plugins/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="./assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/plugins/perfect-scrollbar-main/css/perfect-scrollbar.css">
+  <link rel="stylesheet" href="./assets/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./assets/plugins/material-icons-main/iconfont/material-icons.css">
+
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main-top">
+    <nav class="navbar navbar-expand-lg" id="main-menu">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#!">ライセンス管理</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">月次集計</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">報告書</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">設定</a>
+            </li>
+          </ul>
+          <div class="d-flex flex-row align-items-center" id="user-info">
+            <img src="./assets/images/Avatar.png" alt="user name" class="img img-responsive rounded-circle"
+              id="user-image" />
+            <div class="d-flex flex-column">
+              <span id="user-name">企画開発部</span>
+              <span id="sign-out">愛王 一郎</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg" id="sub-menu">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#!">ライセンス別</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">製品別</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">契約先</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">数量計算ライセンス設定</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!">PLMデータ取り込み</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="filter" class="d-flex align-items-end">
+      <div class="form-group">
+        <label>ライセンス名</label>
+        <input type="text" class="form-control" placeholder="ライセンス検索">
+        <span class="material-icons">cancel</span>
+      </div>
+      <div class="form-group">
+        <label>契約先</label>
+        <select class="select2">
+          <option></option>
+          <!-- <option value="契約先を入力・選択" selected>契約先を入力・選択</option> -->
+          <option value="契約先名 1265346">契約先名 1265346</option>
+          <option value="契約先名 1265347">契約先名 1265347</option>
+          <option value="契約先名 1265348">契約先名 1265348</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>支払方法</label>
+        <div class="custom-select">
+          <select class="form-select">
+            <option value="支払方法を選択" selected>支払方法を選択</option>
+            <option value="全て">全て</option>
+            <option value="後払い">後払い</option>
+            <option value="コミット ">コミット </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group d-flex flex-column checkbox-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="報告対象製品なしを除く" id="checkbox1">
+          <label class="form-check-label" for="checkbox1">
+            報告対象製品なしを除く
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="契約終了分も表示する" id="checkbox2">
+          <label class="form-check-label" for="checkbox2">
+            契約終了分も表示する
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="リストのみ表示" id="checkbox3">
+          <label class="form-check-label" for="checkbox3">
+            リストのみ表示
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="main-content" class="d-flex flex-row flex-grow-1">
+    <div id="license-list" class="d-flex flex-column">
+      <div class="license-title d-flex justify-content-between">
+        <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
+            class="material-icons-outlined">file_copy</span></h2>
+        <button id="btnAddLincense" class="d-flex align-items-center justify-content-center"><span
+            class="material-icons">add</span></button>
+      </div>
+      <div class="table-content">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ﾗｲｾﾝｽｺｰﾄﾞ <span class="material-icons">unfold_more</span></th>
+              <th>ライセンス名 <span class="material-icons">unfold_more</span></th>
+              <th>契約先名 <span class="material-icons">unfold_more</span></th>
+              <th>報告/支払期 <span class="material-icons">unfold_more</span></th>
+              <th>契約終了日 <span class="material-icons">unfold_more</span></th>
+              <th>備考 <span class="material-icons">unfold_more</span></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03038</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03037</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03036</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03035</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03034</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03033</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03032</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03031</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03030</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03029</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03028</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file.svg" /> <a href="#!">03027</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03026</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03025</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03025</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03024</a></td>
+            <td>
+              (xxx) Technical standard Patent sample text sam ...
+            </td>
+            <td>900016 契約先名</td>
+            <td>四半期(1,4,7,10)</td>
+            <td></td>
+            <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
+            <td>
+              <a href="!" class="btnRemove">
+                <span class="material-icons">delete_outline</span>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer d-flex justify-content-between">
+        <div class="table-pagination">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true" class="material-icons">chevron_left</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link active" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true" class="material-icons">chevron_right</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="table-length">
+          <div class="custom-select">
+            <select class="form-select">
+              <option value="50">50 /ページ</option>
+              <option value="100">100 /ページ</option>
+              <option value="200" selected>200 /ページ</option>
+              <option value="300">300 /ページ</option>
+              <option value="500">500 /ページ</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="license-contract"></div>
+  </div>
+
+  <script type="text/javascript" src="./assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="./assets/plugins/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/plugins/select2/dist/js/select2.min.js"></script>
+  <script type="text/javascript" src="./assets/plugins/perfect-scrollbar-main/dist/perfect-scrollbar.min.js"></script>
+  <script type="text/javascript" src="./assets/main.js"></script>
+</body>
+
+</html>
