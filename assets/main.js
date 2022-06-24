@@ -90,14 +90,28 @@ $(function(){
       placeholder: '契約先を入力・選択',
       allowClear: true
     })
-    const ps = new PerfectScrollbar('.table-content', {
+    const psLicenseList = new PerfectScrollbar('#tableLicenseList', {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+    const psContractInfomationMaster = new PerfectScrollbar('#tableLicenseContract', {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+    const psLicensedMaster = new PerfectScrollbar('#tableLincensedMaster', {
       wheelSpeed: 2,
       wheelPropagation: true,
       minScrollbarLength: 20
     });
 
     window.addEventListener('resize',function(){
-      ps.update();
+      psLicenseList.update();
+      psContractInfomationMaster.update();
+      psLicensedMaster.update();
     })
 })
 function clearSelect2Search(e){

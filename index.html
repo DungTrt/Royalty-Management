@@ -22,6 +22,7 @@
 
 <body>
   <div id="main-top">
+    <!--Main menu-->
     <nav class="navbar navbar-expand-lg" id="main-menu">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -54,6 +55,9 @@
         </div>
       </div>
     </nav>
+    <!--Main menu-->
+
+    <!--Sub menu-->
     <nav class="navbar navbar-expand-lg" id="sub-menu">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -81,6 +85,9 @@
         </div>
       </div>
     </nav>
+    <!--Sub menu-->
+
+    <!--Filter-->
     <div id="filter" class="d-flex align-items-end">
       <div class="form-group">
         <label>ライセンス名</label>
@@ -130,7 +137,12 @@
       </div>
     </div>
   </div>
+  <!--Filter-->
+
+  <!--Main content-->
   <div id="main-content" class="d-flex flex-row flex-grow-1">
+
+    <!--Table aside-->
     <div id="license-list" class="d-flex flex-column">
       <div class="license-title d-flex justify-content-between">
         <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
@@ -138,21 +150,45 @@
         <button id="btnAddLincense" class="d-flex align-items-center justify-content-center"><span
             class="material-icons">add</span></button>
       </div>
-      <div class="table-content">
+      <div class="table-content" id="tableLicenseList">
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>ﾗｲｾﾝｽｺｰﾄﾞ <span class="material-icons">unfold_more</span></th>
-              <th>ライセンス名 <span class="material-icons">unfold_more</span></th>
-              <th>契約先名 <span class="material-icons">unfold_more</span></th>
-              <th>報告/支払期 <span class="material-icons">unfold_more</span></th>
-              <th>契約終了日 <span class="material-icons">unfold_more</span></th>
-              <th>備考 <span class="material-icons">unfold_more</span></th>
+              <th></th>
+              <th class="sorting sorting_asc">
+                <div class="d-flex align-items-center">ﾗｲｾﾝｽｺｰﾄﾞ <img src="./assets/images/Sorting_icon_asc.svg" />
+                </div>
+              </th>
+              <th class="sorting sorting_asc">
+                <div class="d-flex align-items-center">ライセンス名 <img src="./assets/images/Sorting_icon_default.svg" />
+                </div>
+              </th>
+              <th class="sorting">
+                <div class="d-flex align-items-center">
+                  契約先名 <img src="./assets/images/Sorting_icon_default.svg" />
+                </div>
+              </th>
+              <th class="sorting">
+                <div class="d-flex align-items-center">
+                  報告/支払期 <img src="./assets/images/Sorting_icon_default.svg" />
+                </div>
+              </th>
+              <th class="sorting">
+                <div class="d-flex align-items-center">
+                  契約終了日 <img src="./assets/images/Sorting_icon_default.svg" />
+                </div>
+              </th>
+              <th class="sorting">
+                <div class="d-flex align-items-center">
+                  備考 <img src="./assets/images/Sorting_icon_default.svg" />
+                </div>
+              </th>
               <th></th>
             </tr>
           </thead>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03038</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td><a href="#!">03038</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -161,13 +197,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03037</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td><a href="#!">03037</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -176,13 +213,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03036</a></td>
+            <td><img src="./assets/images/file_warning.svg" /> </td>
+            <td><a href="#!">03036</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -191,13 +229,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03035</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td><a href="#!">03035</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -206,13 +245,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03034</a></td>
+            <td><img src="./assets/images/file.svg" /></td>
+            <td><a href="#!">03034</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -221,13 +261,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03033</a></td>
+            <td><img src="./assets/images/file_warning.svg" /> </td>
+            <td><a href="#!">03033</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -236,13 +277,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_warning.svg" /> <a href="#!">03032</a></td>
+            <td><img src="./assets/images/file_warning.svg" /> </td>
+            <td><a href="#!">03032</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -251,13 +293,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03031</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td><a href="#!">03031</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -266,13 +309,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03030</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td><a href="#!">03030</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -281,13 +325,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03029</a></td>
+            <td><img src="./assets/images/file.svg" /> </td>
+            <td> <a href="#!">03029</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -296,13 +341,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03028</a></td>
+            <td><img src="./assets/images/file.svg" /></td>
+            <td> <a href="#!">03028</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -311,13 +357,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file.svg" /> <a href="#!">03027</a></td>
+            <td><img src="./assets/images/file.svg" /></td>
+            <td><a href="#!">03027</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -326,13 +373,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03026</a></td>
+            <td><img src="./assets/images/file_expired.svg" /> </td>
+            <td><a href="#!">03026</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -341,13 +389,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03025</a></td>
+            <td><img src="./assets/images/file_expired.svg" /></td>
+            <td> <a href="#!">03025</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -356,13 +405,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03025</a></td>
+            <td><img src="./assets/images/file_expired.svg" /> </td>
+            <td><a href="#!">03025</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -371,13 +421,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
-            <td><img src="./assets/images/file_expired.svg" /> <a href="#!">03024</a></td>
+            <td><img src="./assets/images/file_expired.svg" /></td>
+            <td> <a href="#!">03024</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -386,8 +437,8 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="!" class="btnRemove">
-                <span class="material-icons">delete_outline</span>
+              <a href="#!" class="btnRemove">
+                <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
@@ -426,7 +477,423 @@
         </div>
       </div>
     </div>
-    <div id="license-contract"></div>
+    <!--Table aside-->
+
+    <!--Detail table item-->
+    <div id="license-contract">
+      <div class="empty-result d-flex flex-column align-items-center justify-content-center hidden">
+        <img src="./assets/images/Empty.svg" alt="empty result" />
+        <p class="empty-description">左の一覧からライセンスを選択してください</p>
+      </div>
+      <div class="license-detail-title">
+        <p class="license-detail-id">03038 Free copyright for download file</p>
+        <p class="license-detail-description">900578 契約先名</p>
+      </div>
+
+      <div class="contract-infomation-master d-flex flex-column">
+        <div class="contract-infomation-master-title d-flex justify-content-between">
+          <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
+              class="material-icons-outlined">file_copy</span></h2>
+          <button id="btnAddContractInformationMaster" class="d-flex align-items-center justify-content-center"><span
+              class="material-icons">add</span></button>
+        </div>
+        <div class="table-content" id="tableLicenseContract">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="sorting sorting_desc">
+                  <div class="d-flex align-items-center">
+                    支払区分 <img src="./assets/images/Sorting_icon_Desc.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    報告区分 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    契約開始日 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    契約終了日 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="text-right">単価</th>
+                <th class="text-right">数量残／<br>登録数</th>
+                <th class="text-right">枝番号</th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    備考 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src="./assets/images/cancel_danger.svg" />
+                </td>
+                <td>後払</td>
+                <td>月</td>
+                <td>2018年10月01日</td>
+                <td>2019年10月01日</td>
+                <td class="text-right">$0.0000</td>
+                <td class="text-right">0/0</td>
+                <td class="text-right">1</td>
+                <td>--</td>
+                <td>
+                  <a href="#!" class="btnEdit">
+                    <img src="./assets/images/edit_primary.svg" />
+                  </a>
+                </td>
+                <td>
+                  <img src="./assets/images/delete_danger.svg" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="./assets/images/cancel_danger.svg" />
+                </td>
+                <td>後払</td>
+                <td>四半期(1,4,7,10)</td>
+                <td>2018年10月01日</td>
+                <td>2019年10月01日</td>
+                <td class="text-right">$0.0000</td>
+                <td class="text-right">0/0</td>
+                <td class="text-right">1</td>
+                <td>--</td>
+                <td>
+                  <a href="#!" class="btnEdit">
+                    <img src="./assets/images/edit_primary.svg" />
+                  </a>
+                </td>
+                <td>
+                  <img src="./assets/images/delete_danger.svg" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="./assets/images/cancel_danger.svg" />
+                </td>
+                <td>後払</td>
+                <td>月</td>
+                <td>2018年10月01日</td>
+                <td>2019年10月01日</td>
+                <td class="text-right">$0.0000</td>
+                <td class="text-right">0/0</td>
+                <td class="text-right">1</td>
+                <td>--</td>
+                <td>
+                  <a href="#!" class="btnEdit">
+                    <img src="./assets/images/edit_primary.svg" />
+                  </a>
+                </td>
+                <td>
+                  <img src="./assets/images/delete_danger.svg" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="./assets/images/cancel_danger.svg" />
+                </td>
+                <td>後払</td>
+                <td>月</td>
+                <td>2018年10月01日</td>
+                <td>2019年10月01日</td>
+                <td class="text-right">$0.0000</td>
+                <td class="text-right">0/0</td>
+                <td class="text-right">1</td>
+                <td>--</td>
+                <td>
+                  <a href="#!" class="btnEdit">
+                    <img src="./assets/images/edit_primary.svg" />
+                  </a>
+                </td>
+                <td>
+                  <img src="./assets/images/delete_danger.svg" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="./assets/images/cancel_danger.svg" />
+                </td>
+                <td>後払</td>
+                <td>月</td>
+                <td>2018年10月01日</td>
+                <td>2019年10月01日</td>
+                <td class="text-right">$0.0000</td>
+                <td class="text-right">0/0</td>
+                <td class="text-right">1</td>
+                <td>--</td>
+                <td>
+                  <a href="#!" class="btnEdit">
+                    <img src="./assets/images/edit_primary.svg" />
+                  </a>
+                </td>
+                <td>
+                  <img src="./assets/images/delete_danger.svg" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="lincensed-master d-flex flex-column">
+        <div class="lincensed-master-title d-flex justify-content-between">
+          <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
+              class="material-icons-outlined">file_copy</span></h2>
+          <div class="toolbar d-flex align-items-center">
+            <input class="form-check-input" type="checkbox" value="" id="checkbox4">
+            <label class="form-check-label" for="checkbox4">
+              契約完了分も表示する
+            </label>
+            <button id="btnUpdateLincesedMaster" class="d-flex align-items-center justify-content-center"><span
+                class="material-icons">update</span> 製品情報更新</button>
+            <button id="btnAddLincesedMaster" class="d-flex align-items-center justify-content-center"><span
+                class="material-icons">add</span></button>
+          </div>
+        </div>
+        <div class="table-content" id="tableLincensedMaster">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th>商品コード</th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    型番 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="text-right sorting">
+                  <div class="d-flex align-items-center">
+                    員数 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    <span>ライセンス<br>
+                      管理処理日</span> <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    初回報告月 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    完売日 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    契約終了日 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    備考 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th class="sorting">
+                  <div class="d-flex align-items-center">
+                    更新日 <img src="./assets/images/Sorting_icon_default.svg" />
+                  </div>
+                </th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td class="text-success">A030277</td>
+                <td class="text-success">MSDU1-128GR</td>
+                <td class="text-success bg-warning text-right">1</td>
+                <td></td>
+                <td></td>
+                <td class="text-success">2019年10月01日</td>
+                <td class="text-success bg-warning">2019年10月01日</td>
+                <td class="text-success bg-warning">2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td class="text-success">2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  2
+                </td>
+                <td class="text-success">A030277</td>
+                <td class="text-success">MSDU1-128GR</td>
+                <td class="text-success bg-warning text-right">1</td>
+                <td></td>
+                <td></td>
+                <td class="text-success">2019年10月01日</td>
+                <td class="text-success bg-warning">2019年10月01日</td>
+                <td class="text-success bg-warning">2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td class="text-success">2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  3
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  4
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  5
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  6
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  7
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  7
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-warning text-right">1</td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-warning">2019年10月01日</td>
+                <td class="bg-warning"></td>>2019年10月01日</td>
+                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>2019年10月01日</td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--Detail table item-->
   </div>
 
   <script type="text/javascript" src="./assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
