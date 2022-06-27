@@ -9,12 +9,9 @@
   <link rel="stylesheet" href="./assets/plugins/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="./assets/plugins/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/plugins/perfect-scrollbar-main/css/perfect-scrollbar.css">
-  <link rel="stylesheet" href="./assets/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="./assets/plugins/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="./assets/plugins/sweetalert2-11.4.18/package/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/plugins/material-icons-main/iconfont/material-icons.css">
 
   <title>Document</title>
@@ -90,13 +87,13 @@
     <!--Filter-->
     <div id="filter" class="d-flex align-items-end">
       <div class="form-group">
-        <label>ライセンス名</label>
-        <input type="text" class="form-control" placeholder="ライセンス検索">
-        <span class="material-icons">cancel</span>
+        <label for="lincenseNameFilter">ライセンス名</label>
+        <input type="text" class="form-control" placeholder="ライセンス検索" id="lincenseNameFilter" name="lincenseNameFilter">
+        <span class="material-icons clear">cancel</span>
       </div>
       <div class="form-group">
-        <label>契約先</label>
-        <select class="select2">
+        <label for="contractorFilter">契約先</label>
+        <select class="select2" id="contractorFilter" name="contractorFilter">
           <option></option>
           <!-- <option value="契約先を入力・選択" selected>契約先を入力・選択</option> -->
           <option value="契約先名 1265346">契約先名 1265346</option>
@@ -105,9 +102,9 @@
         </select>
       </div>
       <div class="form-group">
-        <label>支払方法</label>
+        <label for="paymentMethodFilter">支払方法</label>
         <div class="custom-select">
-          <select class="form-select">
+          <select class="form-select" id="paymentMethodFilter" name="paymentMethodFilter">
             <option value="支払方法を選択" selected>支払方法を選択</option>
             <option value="全て">全て</option>
             <option value="後払い">後払い</option>
@@ -117,20 +114,20 @@
       </div>
       <div class="form-group d-flex flex-column checkbox-group">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="報告対象製品なしを除く" id="checkbox1">
-          <label class="form-check-label" for="checkbox1">
+          <input class="form-check-input" type="checkbox" value="報告対象製品なしを除く" id="exceptForNoReportedProductsCheckbox">
+          <label class="form-check-label" for="exceptForNoReportedProductsCheckbox">
             報告対象製品なしを除く
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="契約終了分も表示する" id="checkbox2">
-          <label class="form-check-label" for="checkbox2">
+          <input class="form-check-input" type="checkbox" value="契約終了分も表示する" id="displayContractEndCheckbox">
+          <label class="form-check-label" for="displayContractEndCheckbox">
             契約終了分も表示する
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="リストのみ表示" id="checkbox3">
-          <label class="form-check-label" for="checkbox3">
+          <input class="form-check-input" type="checkbox" value="リストのみ表示" id="showOnlyListLicense">
+          <label class="form-check-label" for="showOnlyListLicense">
             リストのみ表示
           </label>
         </div>
@@ -151,19 +148,19 @@
             class="material-icons">add</span></button>
       </div>
       <div class="table-content" id="tableLicenseList">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-borderless">
           <thead>
             <tr>
               <th></th>
-              <th class="sorting sorting_asc">
+              <th class="sorting sorting_asc table-shadow">
                 <div class="d-flex align-items-center">ﾗｲｾﾝｽｺｰﾄﾞ <img src="./assets/images/Sorting_icon_asc.svg" />
                 </div>
               </th>
-              <th class="sorting sorting_asc">
+              <th class="sorting">
                 <div class="d-flex align-items-center">ライセンス名 <img src="./assets/images/Sorting_icon_default.svg" />
                 </div>
               </th>
-              <th class="sorting">
+              <th class="sorting ">
                 <div class="d-flex align-items-center">
                   契約先名 <img src="./assets/images/Sorting_icon_default.svg" />
                 </div>
@@ -188,7 +185,7 @@
           </thead>
           <tr>
             <td><img src="./assets/images/file.svg" /> </td>
-            <td><a href="#!">03038</a></td>
+            <td class="table-shadow"><a href="#!">03038</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -197,14 +194,14 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
           </tr>
           <tr>
             <td><img src="./assets/images/file.svg" /> </td>
-            <td><a href="#!">03037</a></td>
+            <td class="table-shadow"><a href="#!">03037</a></td>
             <td>
               (xxx) Technical standard Patent sample text sam ...
             </td>
@@ -213,7 +210,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -229,7 +226,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -245,7 +242,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -261,7 +258,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -277,7 +274,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -293,7 +290,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -309,7 +306,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -325,7 +322,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -341,7 +338,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -357,7 +354,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -373,7 +370,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -389,7 +386,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -405,7 +402,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -421,7 +418,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -437,7 +434,7 @@
             <td></td>
             <td>2022/12/01: 契約により2022年10月からXXXX になって...</td>
             <td>
-              <a href="#!" class="btnRemove">
+              <a href="#!" class="btnRemove" onclick="deleteLicense()">
                 <img src="./assets/images/delete_danger.svg" />
               </a>
             </td>
@@ -492,13 +489,13 @@
 
       <div class="contract-infomation-master d-flex flex-column">
         <div class="contract-infomation-master-title d-flex justify-content-between">
-          <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
+          <h2 class="table-title d-flex align-items-center justify-content-center">契約情報マスタ <span
               class="material-icons-outlined">file_copy</span></h2>
           <button id="btnAddContractInformationMaster" class="d-flex align-items-center justify-content-center"><span
               class="material-icons">add</span></button>
         </div>
         <div class="table-content" id="tableLicenseContract">
-          <table class="table table-bordered">
+          <table class="table table-bordered table-borderless">
             <thead>
               <tr>
                 <th></th>
@@ -553,7 +550,9 @@
                   </a>
                 </td>
                 <td>
-                  <img src="./assets/images/delete_danger.svg" />
+                  <a href="#!" class="btnRemove" onclick="deleteContractInformationMaster()">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -574,7 +573,9 @@
                   </a>
                 </td>
                 <td>
-                  <img src="./assets/images/delete_danger.svg" />
+                  <a href="#!" class="btnRemove" onclick="deleteContractInformationMaster()">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -595,7 +596,9 @@
                   </a>
                 </td>
                 <td>
-                  <img src="./assets/images/delete_danger.svg" />
+                  <a href="#!" class="btnRemove" onclick="deleteContractInformationMaster()">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -616,7 +619,9 @@
                   </a>
                 </td>
                 <td>
-                  <img src="./assets/images/delete_danger.svg" />
+                  <a href="#!" class="btnRemove" onclick="deleteContractInformationMaster()">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -637,7 +642,9 @@
                   </a>
                 </td>
                 <td>
-                  <img src="./assets/images/delete_danger.svg" />
+                  <a href="#!" class="btnRemove" onclick="deleteContractInformationMaster()">
+                    <img src="./assets/images/delete_danger.svg" />
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -647,21 +654,21 @@
 
       <div class="lincensed-master d-flex flex-column">
         <div class="lincensed-master-title d-flex justify-content-between">
-          <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス一覧 <span
+          <h2 class="table-title d-flex align-items-center justify-content-center">ライセンス対象マスタ <span
               class="material-icons-outlined">file_copy</span></h2>
           <div class="toolbar d-flex align-items-center">
             <input class="form-check-input" type="checkbox" value="" id="checkbox4">
             <label class="form-check-label" for="checkbox4">
               契約完了分も表示する
             </label>
-            <button id="btnUpdateLincesedMaster" class="d-flex align-items-center justify-content-center"><span
+            <button id="btnUpdateLincesedMasterList" class="d-flex align-items-center justify-content-center"><span
                 class="material-icons">update</span> 製品情報更新</button>
             <button id="btnAddLincesedMaster" class="d-flex align-items-center justify-content-center"><span
                 class="material-icons">add</span></button>
           </div>
         </div>
         <div class="table-content" id="tableLincensedMaster">
-          <table class="table table-bordered">
+          <table class="table table-bordered table-borderless">
             <thead>
               <tr>
                 <th></th>
@@ -729,7 +736,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -751,7 +758,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -773,7 +780,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -795,7 +802,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -817,7 +824,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -839,7 +846,7 @@
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
@@ -855,20 +862,31 @@
                 <td>2019年10</td>
                 <td class="bg-warning">2019年10月01日</td>
                 <td class="bg-warning"></td>>2019年10月01日</td>
-                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>
+
+                  <!-- HTML to write -->
+                  <span data-bs-placement="top" data-toggle="tooltip" title="2022/12/01:
+                  契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、">2022/12/01:
+                    契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                  <div class="tooltip" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                    </div>
+                  </div>
+                </td>
                 <td>2019年10月01日</td>
                 <td>
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
               </tr>
               <tr>
                 <td>
-                  7
+                  8
                 </td>
                 <td>A030277</td>
                 <td>MSDU1-128GR</td>
@@ -877,18 +895,50 @@
                 <td>2019年10</td>
                 <td class="bg-warning">2019年10月01日</td>
                 <td class="bg-warning"></td>>2019年10月01日</td>
-                <td>2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</td>
+                <td>
+                  <span class="tooltips">
+                    2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、
+                    <span class="tooltiptext">2022/12/01: 契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                  </span>
+                </td>
                 <td>2019年10月01日</td>
                 <td>
                   <input class="form-check-input" type="checkbox" value="">
                 </td>
                 <td>
-                  <a href="#!" class="btnRemove">
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
                     <img src="./assets/images/delete_danger.svg" />
                   </a>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <input type="text" class="form-control" placeholder="型番を入力">
+                  <span class="material-icons" id="btnSearchContract">search</span>
+                </td>
+                <td>
+                  <input type="text" class="form-control" value="1">
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
+                    <img src="./assets/images/delete-forever.svg" />
+                  </a>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -896,11 +946,717 @@
     <!--Detail table item-->
   </div>
 
+
+  <!-- License master registration Modal-->
+  <div class="modal fade" id="licenseMasterRegistrationModal" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">ライセンスマスタ登録</h5>
+          <a type="button" data-bs-dismiss="modal" aria-label="Close">
+            <img src="./assets/images/close.svg" />
+          </a>
+        </div>
+        <div class="modal-body" id="licenseMasterRegistrationModalBody">
+          <div class="modal-body-left-side w65">
+            <div class="card">
+              <div class="card-body">
+                <div class="alert alert-info alert-dismissible d-flex align-items-start" role="alert">
+                  <img src="./assets/images/info.svg" />
+                  <div class="alert-content">
+                    <!-- <h4 class="alert-heading">製品情報更新</h4> -->
+                    <p class="alert-body">ライセンス名に文字列「計算」が含まれるのはPLMへのマスター連携は行われません。</p>
+                  </div>
+                  <a type="button" data-bs-dismiss="alert" aria-label="Close">
+                    <img src="./assets/images/close.svg" />
+                  </a>
+                </div>
+
+                <form class="form-horizontal" role="form">
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationLicenseCode">ライセンスコード</label>
+                      <input type="number" readonly class="form-control" id="licenseMasterRegistrationLicenseCode">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationLicenseName">ライセンス名 <span class="required">必須</span></label>
+                      <input type="text" class="form-control" placeholder="ライセンス名を入力"
+                        id="licenseMasterRegistrationLicenseName">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <select class="select2" id="licenseMasterRegistrationLicenseCodeSelect">
+                        <option></option>
+                        <!-- <option value="契約先を入力・選択" selected>契約先を入力・選択</option> -->
+                        <option value="契約先名 1265346">契約先名 1265346</option>
+                        <option value="契約先名 1265347">契約先名 1265347</option>
+                        <option value="契約先名 1265348">契約先名 1265348</option>
+                      </select>
+                      <!-- <input type="text" class="form-control" placeholder="ライセンスコードを入力・選択"> -->
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="btn btn-outline-primary d-flex align-items-center">コピー</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationLicenseClassification">ライセンス分類 <span
+                          class="required">必須</span></label>
+                      <input type="text" class="form-control" placeholder="特許権"
+                        id="licenseMasterRegistrationLicenseClassification">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationLicenseType">ライセンス種別 <span class="required">必須</span></label>
+                      <div class="custom-select">
+                        <select class="form-select" id="licenseMasterRegistrationLicenseType">
+                          <option value="ライセンス名を入力" selected>ライセンス名を入力</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationContractor">契約先 <span class="required">必須</span></label>
+                      <input type="text" class="form-control" placeholder="契約先を入力・選択"
+                        id="licenseMasterRegistrationContractor">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationApprovalNumber">稟申番号</label>
+                      <input type="text" class="form-control" placeholder="稟申番号を入力"
+                        id="licenseMasterRegistrationApprovalNumber">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationApprovalDate">決裁日</label>
+                      <input type="text" class="form-control date" placeholder="年/月/日" readonly
+                        id="licenseMasterRegistrationApprovalDate">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="licenseMasterRegistrationContractEndDate">契約終了日</label>
+                      <input type="text" class="form-control date" placeholder="年/月/日" readonly
+                        id="licenseMasterRegistrationContractEndDate">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label>報告書作成区分 <span class="required">必須</span></label>
+                      <div class="custom-select">
+                        <select class="form-select" id="licenseMasterRegistrationreportPreparationCategory">
+                          <option value="PDF" selected>PDF</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>報告書フォーマット区分 <span class="required">必須</span></label>
+                      <div class="custom-select">
+                        <select class="form-select" id="licenseMasterRegistrationReportFormatClassification">
+                          <option value="報告書フォーマット区分を選択" selected>報告書フォーマット区分を選択</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label>報告書送付区分 <span class="required">必須</span></label>
+                      <div class="custom-select">
+                        <select class="form-select" id="licenseMasterRegistrationReportSendingCategory">
+                          <option value="報告書送付区分を選択" selected>報告書送付区分を選択</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="line"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <label for="licenseMasterRegistrationRemarks">備考</label>
+                      <textarea class="form-control" placeholder="備考を入力" rows="5" id="licenseMasterRegistrationRemarks">
+                      </textarea>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-body-right-side w35">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">更新情報</h5>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>登録日</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="licenseMasterRegistrationRegistrationDate">--</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>登録者</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="licenseMasterRegistrationRegistrationPerson">--</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>更新日</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="licenseMasterRegistrationUpdatedDate">--</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>更新者</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="licenseMasterRegistrationChanger">--</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="契約終了" id="licenseMasterRegistrationAnEndOfAContract">
+            <label class="form-check-label" for="licenseMasterRegistrationAnEndOfAContract">
+              契約終了
+            </label>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="btnUpdateLicenseMasterRegistration">登録</button>
+            <button type="button" class="btn btn-white" data-bs-dismiss="modal">キャンセル</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- License master registration Modal-->
+
+  <!--Contract information master registration modal-->
+  <div class="modal fade" id="contractInformationMasterRegistrationModal" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">契約情報マスタ登録</h5>
+          <a type="button" data-bs-dismiss="modal" aria-label="Close">
+            <img src="./assets/images/close.svg" />
+          </a>
+        </div>
+        <div class="modal-body" id="contractInformationMasterRegistrationModalBody">
+          <div class="modal-body-left-side w60">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">契約内容</h5>
+                <form class="form-horizontal" role="form">
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterContractDate">契約締結日</label>
+                      <input type="text" class="form-control date" placeholder="年/月/日"
+                        id="contractInformationMasterContractDate" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="cumulativeCommitCalculationMonth">契約締結日 <span class="required">必須</span></label>
+                      <input type="text" class="form-control month" placeholder="年/月"
+                        id="cumulativeCommitCalculationMonth" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterContractStartDate">契約開始日 <span
+                          class="required">必須</span></label>
+                      <input type="text" class="form-control date" placeholder="年/月/日"
+                        id="contractInformationMasterContractStartDate" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterContractCompletionDate">契約完了日</label>
+                      <input type="text" class="form-control date" placeholder="年/月/日"
+                        id="contractInformationMasterContractCompletionDate" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="line"></div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-info alert-dismissible d-flex align-items-start" role="alert">
+                    <img src="./assets/images/info.svg" />
+                    <div class="alert-content">
+                      <!-- <h4 class="alert-heading">製品情報更新</h4> -->
+                      <p class="alert-body">[注意] 登録後は支払方法、登録数量の変更は出来ません</p>
+                    </div>
+                    <a type="button" data-bs-dismiss="alert" aria-label="Close">
+                      <img src="./assets/images/close.svg" />
+                    </a>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="">支払方法</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterPaymentMethod">
+                          <option value="後払い" selected>後払い</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="">報告／支払期</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterReportingPaymentPeriod">
+                          <option value="月" selected>月</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="line"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterRegistrationQuantity">登録数量</label>
+                      <input type="text" id="contractInformationMasterRegistrationQuantity" class="form-control"
+                        placeholder="" value="0">
+                      <!-- <intput type="text" class="form-control" id="registrationQuantity" value="0"> -->
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterQuantityRemain">数量残</label>
+                      <input type="text" id="contractInformationMasterQuantityRemain" class="form-control"
+                        placeholder="" value="0">
+                      <!-- <intput type="text" class="form-control" id="quantityRemain" value="0"> -->
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterQuantityCalculation">数量計算</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterQuantityCalculation">
+                          <option value="売上数 - 返品数" selected>売上数 - 返品数</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterConsumption">消費量</label>
+                      <input type="text" id="contractInformationMasterConsumption" min="0" class="form-control">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="line"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterRoyaltyAmountCalculationMethod">ロイヤリティ金額計算方法</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterRoyaltyAmountCalculationMethod">
+                          <option value="数量 x 単価" selected>数量 x 単価</option>
+                          <option value="全て">全て</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="contractInformationMasterRoyaltyRate">ロイヤリティ率</label>
+                      <input type="text" id="contractInformationMasterRoyaltyRate" placeholder="ロイヤリティ率を入力"
+                        class="form-control">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <label for="contractInformationMasterCurrencyUnit">通貨単位</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterCurrencyUnit">
+                          <option value="¥" selected>¥</option>
+                          <option value="$">$</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="contractInformationMasterUnitPrice">単価 <span class="required">必須</span></label>
+                      <input type="text" class="form-control" id="contractInformationMasterUnitPrice"
+                        placeholder="単価を入力">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="contractInformationMasterTaxClassification">課税区分</label>
+                      <div class="custom-select">
+                        <select class="form-select" id="contractInformationMasterTaxClassification">
+                          <option value="消費税" selected>消費税</option>
+                          <option value="後払い">後払い</option>
+                          <option value="コミット ">コミット </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="contractInformationMasterTaxRate">税率(％)</label>
+                      <input type="text" class="form-control" id="contractInformationMasterTaxRate" min="0" value="10">
+                      <span class="material-icons clear">cancel</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <div class="line"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <label for="contractInformationMasterRemarks">備考</label>
+                      <textarea id="contractInformationMasterRemarks" rows="5" class="form-control"
+                        placeholder="備考を入力"></textarea>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body-right-side w40 d-flex flex-column">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>ライセンスコード</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterLicenseCode">15</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>ライセンス名</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterLicenseName">XxxxXx Sound Light</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>契約先コード</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterContractCode">900038</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>契約先名</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterContractName">900038 Text nhật</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>稟申番号</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterApprovalNumber">900026-06-079t</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>決裁日</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterApprovalDate">2000-09-27</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>枝番号</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterBranchNumber">1</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">コミットについて</h5>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">最終コミット年月</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterLastCommitDate">2000-09-27</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">コミット残</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterCommitRemain">2</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">累計コミット数</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterCumulativeNumberOfCommits">10</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-tit">更新情報</h5>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">登録日</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterRegistrationDate">2000-09-27</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">登録者</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterRegistrationPerson">haipt</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">更新日</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterUpdatedDate">2000-09-27</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="">更新者</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label id="contractInformationMasterChanger">ducnv</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="契約終了"
+              id="contractInformationMasterExcludeFromAgregation">
+            <label class="form-check-label" for="contractInformationMasterExcludeFromAgregation">
+              集計対象外とする
+            </label>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="btnUpdateContractorInfomation">登録</button>
+            <button type="button" class="btn btn-white" data-bs-dismiss="modal">キャンセル</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Contract information master registration modal-->
+
+  <!--Search contract modal-->
+  <div class="modal fade" id="searchContractModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered search-modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="search-contract">
+            <div class="toolbar">
+              <div class="form-group row">
+                <div class="col-sm-4">
+                  <span class="material-icons search">search</span>
+                  <input type="text" class="form-control" placeholder="型番を" id="searchContractModelNumber">
+                  <span class="material-icons clear">cancel</span>
+                </div>
+              </div>
+            </div>
+            <div class="table-content" id="searchContractTable">
+              <table class="table table-bordered table-borderless">
+                <thead>
+                  <th class="sorting">
+                    <div class="d-flex align-items-cente">
+                      商品コード <img src="./assets/images/Sorting_icon_default.svg">
+                    </div>
+                  </th>
+                  <th class="sorting">
+                    <div class="d-flex align-items-cente">
+                      型番 <img src="./assets/images/Sorting_icon_default.svg">
+                    </div>
+                  </th>
+                  <th class="sorting">
+                    <div class="d-flex align-items-center">
+                      完売日 <img src="./assets/images/Sorting_icon_default.svg">
+                    </div>
+                  </th>
+                  <th class="sorting">
+                    <div class="d-flex align-items-center">
+                      製品ジャンル <img src="./assets/images/Sorting_icon_default.svg">
+                    </div>
+                  </th>
+                  <th class="sorting">
+                    <div class="d-flex align-items-center">
+                      担当部署 <img src="./assets/images/Sorting_icon_default.svg">
+                    </div>
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>A030277</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                    <td>MSDU1 - 128GR</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="btnUpdateLicenseMasterRegistration">適用</button>
+          <button type="button" class="btn btn-white" data-bs-dismiss="modal">キャンセル</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Search contract modal-->
+
+  <!--Alert message-->
+  <div id="alert-section"></div>
+  <!--Alert message-->
+
+
+
   <script type="text/javascript" src="./assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="text/javascript" src="./assets/plugins/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="./assets/plugins/select2/dist/js/select2.min.js"></script>
   <script type="text/javascript" src="./assets/plugins/perfect-scrollbar-main/dist/perfect-scrollbar.min.js"></script>
-  <script type="text/javascript" src="./assets/main.js"></script>
+  <script type="text/javascript"
+    src="./assets/plugins/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript"
+    src="./assets/plugins/bootstrap-datepicker-master/dist/locales/bootstrap-datepicker.ja.min.js"></script>
+  <script type="text/javascript" src="./assets/plugins/sweetalert2-11.4.18/package/dist/sweetalert2.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>
 
 </html>
