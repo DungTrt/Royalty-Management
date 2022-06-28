@@ -78,7 +78,11 @@ function closeAllSelect(elmnt) {
 }
 /*if the user clicks anywhere outside the select box,
 then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
+document.addEventListener("click", function(){
+  closeAllSelect();
+  $("span.canEdit").next().hide();
+  $("span.canEdit").show();
+});
 
 $(function(){
     //$('[data-toggle="tooltip"]').tooltip()
@@ -92,54 +96,54 @@ $(function(){
       placeholder: '契約先を入力・選択',
       allowClear: true
     })
-    $("#licenseCodeSelect").select2({
+    $("#licenseMasterRegistrationLicenseCodeSelect").select2({
       placeholder: 'ライセンスコードを入力・選択',
       allowClear: true
     })
-    const psLicenseList = new PerfectScrollbar('#tableLicenseList', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    });
+    // const psLicenseList = new PerfectScrollbar('#tableLicenseList', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // });
 
-    const psContractInfomationMaster = new PerfectScrollbar('#tableLicenseContract', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    });
+    // const psContractInfomationMaster = new PerfectScrollbar('#tableLicenseContract', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // });
 
-    const psLicensedMaster = new PerfectScrollbar('#tableLincensedMaster', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    });
+    // const psLicensedMaster = new PerfectScrollbar('#tableLincensedMaster', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // });
 
-    const psContractInformationMasterRegistrationModalBody=new PerfectScrollbar('#contractInformationMasterRegistrationModalBody', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    })
+    // const psContractInformationMasterRegistrationModalBody=new PerfectScrollbar('#contractInformationMasterRegistrationModalBody', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // })
 
-    const psLicenseMasterRegistrationModalBody=new PerfectScrollbar('#licenseMasterRegistrationModalBody', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    })
+    // const psLicenseMasterRegistrationModalBody=new PerfectScrollbar('#licenseMasterRegistrationModalBody', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // })
 
-    const pssearchContractTable=new PerfectScrollbar('#searchContractTable', {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    })
+    // const pssearchContractTable=new PerfectScrollbar('#searchContractTable', {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // })
 
-    window.addEventListener('resize',function(){
-      psLicenseList.update();
-      psContractInfomationMaster.update();
-      psLicensedMaster.update();
-      psContractInformationMasterRegistrationModalBody.update();
-      psLicenseMasterRegistrationModalBody.update();
-      pssearchContractTable.update();
-    })
+    // window.addEventListener('resize',function(){
+    //   psLicenseList.update();
+    //   psContractInfomationMaster.update();
+    //   psLicensedMaster.update();
+    //   psContractInformationMasterRegistrationModalBody.update();
+    //   psLicenseMasterRegistrationModalBody.update();
+    //   pssearchContractTable.update();
+    // })
 
     $("#btnAddLincesedMaster").click(function(){
       $("#licenseMasterRegistrationModal").modal('show');
@@ -148,7 +152,6 @@ $(function(){
     $("#btnAddContractInformationMaster").click(function(){
       $("#contractInformationMasterRegistrationModal").modal('show');
     })
-
     $('[data-toggle="tooltip"]').tooltip({placement:"top"})
 
     $(".form-control.date").datepicker({
@@ -257,6 +260,14 @@ $(function(){
     $("#btnSearchContract").click(function(){
       $("#searchContractModal").modal("show");
     })
+
+    $("span.canEdit").click(function(e){
+      e.stopPropagation();
+      $("span.canEdit").show();
+      $("span.canEdit").next().hide();
+      $(this).hide();
+      $(this).next().show().focus();
+    })
 })
 
 $("input").on('input',function(e){
@@ -342,3 +353,66 @@ function deleteContractInformationMaster(){
     cancelButtonText:'キャンセル',
   })
 }
+
+//resize Column Table
+document.addEventListener('DOMContentLoaded', function () {
+  const createResizableTable = function (table) {
+      const thCols = $(table).find("th");
+      [].forEach.call(thCols, function (col) {
+          // Add a resizer element to the column
+          const resizer = col.querySelectorAll(".resizer");
+          if(resizer.length>0){
+            createResizableColumn(col, resizer[0]);
+          }
+          
+      });
+      
+      // const tdCols = $(table).find("td");
+      // [].forEach.call(tdCols, function (col) {
+      //     // Add a resizer element to the column
+      //     const resizer = document.createElement('div');
+      //     resizer.classList.add('resizer');
+
+      //     // Set the height
+      //     resizer.style.height = `${table.offsetHeight}px`;
+
+      //     col.appendChild(resizer);
+
+      //     createResizableColumn(col, resizer);
+      // });
+  };
+
+  const createResizableColumn = function (col, resizer) {
+      let x = 0;
+      let w = 0;
+
+      const mouseDownHandler = function (e) {
+          x = e.clientX;
+
+          const styles = window.getComputedStyle(col);
+          w = parseInt(styles.width, 10);
+
+          document.addEventListener('mousemove', mouseMoveHandler);
+          document.addEventListener('mouseup', mouseUpHandler);
+
+          resizer.classList.add('resizing');
+      };
+
+      const mouseMoveHandler = function (e) {
+          const dx = e.clientX - x;
+          col.style.minWidth = `${w + dx}px`;
+      };
+
+      const mouseUpHandler = function () {
+          resizer.classList.remove('resizing');
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+      };
+
+      resizer.addEventListener('mousedown', mouseDownHandler);
+  };
+
+  createResizableTable($("#tableLicenseContract .table"));
+  createResizableTable($("#tableLincensedMaster .table"));
+  createResizableTable($("#tableLicenseList .table"));
+});

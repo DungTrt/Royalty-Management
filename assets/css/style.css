@@ -11,6 +11,27 @@
 @font-face { font-family: "Noto Sans CJK JP"; src: url("../fonts/NotoSansCJKjp-Black.otf"); font-weight: 800; }
 @font-face { font-family: "Noto Sans CJK JP"; src: url("../fonts/NotoSansCJKjp-Black.otf"); font-weight: 900; }
 body { background: rgb(250, 251, 252); width: 100vw; height: 100vh; overflow: hidden; font-family: "Noto Sans CJK JP", sans-serif; color: var(--text-color-default); display: flex; flex-direction: column; }
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #F4F5F7;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C1C7D0;
+  border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #C1C7D0;
+}
 .text-right { text-align: right; }
 .text-left { text-align: left; }
 #main-content { height: 100%; padding: 8px 16px 18px; width: 100%; gap: 16px; }
@@ -22,7 +43,7 @@ body { background: rgb(250, 251, 252); width: 100vw; height: 100vh; overflow: hi
 .license-title button span, .contract-infomation-master-title button span, .lincensed-master-title button span { color: rgb(0, 101, 255); font-size: 14px; }
 .table-title { font-weight: 500; font-size: 20px; line-height: 28px; margin: 0px; }
 .table-title span { color: rgb(151, 160, 174); padding-left: 18px; font-size: 19px; }
-.table-content { flex: 1 1 0%; overflow: auto; position: relative; padding: 0px 10px 10px 0px; background: rgb(244, 245, 247); border-top: 2px solid rgb(244, 245, 247); }
+.table-content {flex: 1 1 0%;overflow: auto;position: relative;/* padding: 0px 10px 10px 0px; */background: rgb(244, 245, 247);border-top: 2px solid rgb(244, 245, 247);}
 .table { color: var(--text-color-default); }
 .table-footer { padding: 16px 8px; height: 64px; background: var(--bg-white); box-shadow: rgb(244, 245, 247) 0px 1px 0px inset; }
 #license-contract { width: 70%; height: calc((100vh - 202px) - 32px); }
@@ -212,12 +233,12 @@ select.select2 { opacity: 0; }
 .table-length .select-items { top: -245px; }
 .table-content::before { content: ""; position: absolute; left: 0px; width: 1px; background-color: var(--bg-white); height: 100%; top: 0px; z-index: 10; }
 .table-content .table { border-color: rgb(235, 236, 240) !important; }
-.table-content .table td { background-color: var(--bg-white); }
+.table-content .table td {background-color: var(--bg-white);}
 .table-content .table thead th { position: sticky; top: -1px; gap: 8px; }
 .table-content .table thead th.sorting { cursor: pointer; }
 .table-content table thead th div { gap: 8px; }
 #license-list .table-content .table tbody td:nth-child(1), #license-list .table-content .table thead th:nth-child(1) { position: sticky; left: 0px; }
-#license-list .table-content .table thead th:nth-child(2) div { position: relative; }
+#license-list .table-content .table thead th:nth-child(2) div,#license-list .table-content .table tbody td:nth-child(2) div {/* position: absolute; */}
 #license-list .table-content .table thead th:nth-child(2) div::before {/* content: ""; */width: 2px;height: 41px;position: absolute;right: 0px;top: -8px;box-shadow: rgba(1, 18, 34, 0.1) 0px 4px 8px;}
 #license-list .table-content .table tbody td:nth-child(2), #license-list .table-content .table thead th:nth-child(2) { position: sticky; left: 50px; }
 .table-content .table thead th:nth-child(1), .table-content .table thead th:nth-child(2) { z-index: 1; }
@@ -252,13 +273,13 @@ select.select2 { opacity: 0; }
 .table-content .table thead th:nth-child(1), .table-content .table tbody td:nth-child(1), .table-content .table tfoot td:nth-child(1) { border-right-width: 0px !important; }
 .table-content .table thead th:nth-child(2), .table-content .table tbody td:nth-child(2), .table-content .table tfoot td:nth-child(2) { border-left-width: 0px !important; }
 #license-contract .table-content .table thead th:nth-last-child(2), #license-contract .table-content .table tbody td:nth-last-child(2), #license-contract .table-content .table tfoot td:nth-last-child(2) { border-right-width: 0px !important; border-left-width: 0px !important; }
-#license-contract .table-content .table thead th:nth-last-child(1), #license-contract .table-content .table tbody td:nth-last-child(1), #license-contract .table-content .table tfoot td:nth-last-child(1) { border-left-width: 0px !important; border-right-width: 0px !important; }
+#license-contract .table-content .table thead th:nth-last-child(1), #license-contract .table-content .table tbody td:nth-last-child(1), #license-contract .table-content .table tfoot td:nth-last-child(1) {border-left-width: 0px !important;border-right-width: 0px !important;text-align: center;/* display: flex; *//* align-items: center; *//* justify-content: center; *//* height: 48px; */}
 #license-contract .table-content .table thead th:nth-last-child(3) { border-right-width: 0px !important; }
 #license-list .table-content .table tbody td:nth-child(1), #license-list .table-content .table thead th:nth-child(1) { position: sticky; left: -1px; }
 #license-list .table-content .table tbody td:nth-child(2), #license-list .table-content .table thead th:nth-child(2) { position: sticky; left: 48px; }
 #tableLicenseContract.table-content .table tbody td:not(:nth-child(1)):not(:nth-last-child(1)):not(:nth-last-child(2)), #tableLicenseContract.table-content .table thead th:not(:nth-child(1)):not(:nth-last-child(1)):not(:nth-last-child(2)) { }
 .text-success { color: var(--bg-success)  !important; }
-td.bg-warning { background: var(--bg-warning-table)  !important; }
+.table-content .table td.bg-table-warning { background: var(--bg-warning-table);}
 #tableLincensedMaster.table-content .table tbody td:nth-child(2), #tableLincensedMaster.table-content .table thead th:nth-child(2) { min-width: 100px; }
 #tableLincensedMaster.table-content .table tbody td:nth-child(3), #tableLincensedMaster.table-content .table thead th:nth-child(3) { min-width: 180px; }
 #tableLincensedMaster.table-content .table tbody td:nth-child(4), #tableLincensedMaster.table-content .table thead th:nth-child(4) { min-width: 76px; }
@@ -364,9 +385,33 @@ td.bg-warning { background: var(--bg-warning-table)  !important; }
 .tooltips:hover .tooltiptext { display: block; opacity: 1; }
 #searchContractModal.modal { background: unset; }
 #btnSearchContract { width: 24px; height: 24px; position: absolute; top: 50%; transform: translateY(-50%); background: rgb(38, 132, 255); border-radius: 2px; cursor: pointer; color: var(--bg-white); right: 18px; }
-.bg-danger { background: rgb(255, 189, 173) !important; }
+.table-content .table td.bg-table-danger { background: rgb(255, 189, 173)}
 #tableLincensedMaster tfoot td:nth-child(3) { position: relative; }
 .table-shadow {
-    box-shadow: 5px 0 5px #ebecf0 !important;
-    display: block;
+  filter: drop-shadow(4px 0px 8px rgba(1, 18, 34, 0.1));
+}
+tr.active td {background: #DEEBFF !important;}
+.table-content .table tr.bg-table-danger td{
+  background: #FFBDAD !important;
+}
+.resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  cursor: col-resize;
+  user-select: none;
+  height: 100%;
+}
+/* .resizer:hover,
+.resizing {
+  border-right: 2px solid blue;
+} */
+
+.resizable {
+  border: 1px solid gray;
+  height: 100px;
+  width: 100px;
+  position: relative;
+  height: 100%;
 }
