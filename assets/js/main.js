@@ -145,7 +145,7 @@ $(function(){
     //   pssearchContractTable.update();
     // })
 
-    $("#btnAddLincesedMaster").click(function(){
+    $("#btnAddLincense").click(function(){
       $("#licenseMasterRegistrationModal").modal('show');
     })
 
@@ -210,8 +210,9 @@ $(function(){
       })
     })
 
-    $(".sorting").click(function(){
-      let trElement=$(this).parent();
+    $(".sorting").click(function(e){
+      if(!isResizing && !e.target.closest('resizer')){
+        let trElement=$(this).parent();
 
       if($(this).hasClass('sorting_asc')){
         $(this).removeClass('sorting_asc');
@@ -244,8 +245,51 @@ $(function(){
         $(this).addClass("sorting_asc");
         $(imgElement).attr("src","./assets/images/Sorting_icon_asc.svg");
       }
+      }
 
       
+    })
+
+    $("#btnAddLincesedMaster").click(function(){
+      let tr=`<tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <div>
+                    <input type="text" class="form-control" placeholder="型番を入力">
+                    <span class="material-icons btnSearchContract" onclick="showSearchContractModal()">search</span>
+                  </div>
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="1" style="padding:6px;text-align: right;">
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <input type="text" class="form-control date" placeholder="年/月/日" style="padding:6px;">
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="" style="padding:6px;">
+                </td>
+                <td></td>
+                <td>
+                  <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                  <a href="#!" class="btnRemoveForever" onclick="deleteForeverLicenseMaster()">
+                    <img src="./assets/images/delete-forever.svg" />
+                  </a>
+                </td>
+              </tr>`;
+      $("#tableLincensedMaster tbody").append(tr);
+      $(".form-control.date").datepicker({
+        language:'ja',
+        format: 'yyyy/MM/dd',
+        autoclose:true,
+        clearBtn:true,
+        todayHighlight:true
+      })
     })
 
     // $(".sorting_desc").click(function(){
@@ -257,9 +301,7 @@ $(function(){
     //   console.log(trElement);
     // })
 
-    $("#btnSearchContract").click(function(){
-      $("#searchContractModal").modal("show");
-    })
+
 
     $("span.canEdit").click(function(e){
       e.stopPropagation();
@@ -268,7 +310,18 @@ $(function(){
       $(this).hide();
       $(this).next().show().focus();
     })
+    $("tbody td .form-control").click(function(e){
+      e.stopPropagation();
+      // $("span.canEdit").show();
+      // $("span.canEdit").next().hide();
+      // $(this).hide();
+      // $(this).next().show().focus();
+    })
 })
+
+function showSearchContractModal(){
+  $("#searchContractModal").modal("show");
+}
 
 $("input").on('input',function(e){
   let clearBtn=$(this).parent().find(".clear");
@@ -355,6 +408,11 @@ function deleteContractInformationMaster(){
 }
 
 //resize Column Table
+let isResizing=false;
+let autoPreventSortAfterResize;
+$(".resize").click(function (e) {
+  e.stopPropagation();
+})
 document.addEventListener('DOMContentLoaded', function () {
   const createResizableTable = function (table) {
       const thCols = $(table).find("th");
@@ -399,14 +457,21 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
       const mouseMoveHandler = function (e) {
+          isResizing=true;
           const dx = e.clientX - x;
           col.style.minWidth = `${w + dx}px`;
+          isResizing=true;
       };
 
       const mouseUpHandler = function () {
           resizer.classList.remove('resizing');
           document.removeEventListener('mousemove', mouseMoveHandler);
           document.removeEventListener('mouseup', mouseUpHandler);
+          
+          autoPreventSortAfterResize=setTimeout(function(){
+            isResizing=false;
+          },1000)
+          
       };
 
       resizer.addEventListener('mousedown', mouseDownHandler);
@@ -416,3 +481,8 @@ document.addEventListener('DOMContentLoaded', function () {
   createResizableTable($("#tableLincensedMaster .table"));
   createResizableTable($("#tableLicenseList .table"));
 });
+
+$("#showOnlyListLicense").change(function () {
+  $("#license-list").toggleClass("w100");
+  $("#license-contract").toggleClass("hidden");
+})

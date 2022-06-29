@@ -5,1190 +5,240 @@
 <head>
     <meta charset="UTF-8">
     <title>Resizable Table Columns | Webdevtrick.com</title>
-    <style>
-        /* Code By Webdevtrick ( https://webdevtrick.com ) */
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-        }
-
-        table {
-            min-width: 100vw;
-            width: auto;
-            -webkit-box-flex: 1;
-            flex: 1;
-            display: grid;
-            border-collapse: collapse;
-            grid-template-columns:
-                minmax(150px, 1fr) minmax(150px, 1.67fr) minmax(150px, 1.67fr) minmax(150px, 1.67fr) minmax(150px, 3.33fr) minmax(150px, 1.67fr) minmax(150px, 3.33fr) minmax(150px, 1.67fr);
-        }
-
-        thead,
-        tbody,
-        tr {
-            display: contents;
-        }
-
-        th,
-        td {
-            padding: 15px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        th {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            background: #5cb85c;
-            text-align: left;
-            font-weight: normal;
-            font-size: 1.1rem;
-            color: white;
-            position: relative;
-        }
-
-        th:last-child {
-            border: 0;
-        }
-
-        .resize-handle {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: black;
-            opacity: 0;
-            width: 3px;
-            cursor: col-resize;
-        }
-
-        .resize-handle:hover,
-        .header--being-resized .resize-handle {
-            opacity: 0.5;
-        }
-
-        th:hover .resize-handle {
-            opacity: 0.3;
-        }
-
-        td {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            color: #808080;
-        }
-
-        tr:nth-child(even) td {
-            background: #f8f6ff;
-        }
-    </style>
 </head>
 
 <body>
-    <table>
+    <table class="table table-bordered table-borderless">
         <thead>
             <tr>
-                <th data-type="numeric">ID <span class="resize-handle"></span></th>
-                <th data-type="text-short">First name <span class="resize-handle"></span></th>
-                <th data-type="text-short">Last name <span class="resize-handle"></span></th>
-                <th data-type="text-short">Email <span class="resize-handle"></span></th>
-                <th data-type="text-long">Street <span class="resize-handle"></span></th>
-                <th data-type="text-short">Country <span class="resize-handle"></span></th>
-                <th data-type="text-long">Pincode <span class="resize-handle"></span></th>
-                <th data-type="text-short">IBAN <span class="resize-handle"></span></th>
+                <th></th>
+                <th>商品コード <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        型番 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="text-right sorting" data-type="text-short">
+                    <div class="d-flex align-items-center">
+                        員数 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        <span>ライセンス<br>
+                            管理処理日</span> <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        初回報告月 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        完売日 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        契約終了日 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        備考 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th class="sorting">
+                    <div class="d-flex align-items-center">
+                        更新日 <img src="./assets/images/Sorting_icon_default.svg" />
+                    </div>
+                    <div class="resizer"></div>
+                </th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>000001</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000002</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000003</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000004</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000005</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000006</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000007</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000008</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000009</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000010</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000011</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000012</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000013</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000014</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000015</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000016</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000017</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            <tr>
-                <td>000018</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000019</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000020</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000021</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000022</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000023</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000024</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000025</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000026</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000027</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000028</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000029</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000030</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000031</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000032</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000033</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000034</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000035</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000036</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000037</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000038</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000039</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000040</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000041</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000042</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000043</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000044</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000045</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000046</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000047</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000048</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000049</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000050</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000051</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000052</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000053</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000054</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000055</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000056</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000057</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000058</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000059</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000060</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000061</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000062</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000063</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000064</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000065</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000066</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000067</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000068</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000069</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000070</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000071</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000072</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000073</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000074</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000075</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000076</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000077</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000078</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000079</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000080</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000081</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000082</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000083</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000084</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000085</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000086</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000087</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000088</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000089</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000090</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000091</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000092</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000093</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000094</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000095</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000096</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000097</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000098</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000099</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
-            <tr>
-                <td>000100</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>usermail@gmail.com</td>
-                <td>New York</td>
-                <td>United State</td>
-                <td>21520</td>
-                <td>XYZ123</td>
-            </tr>
+            <tr class="bg-table-danger">
+                <td>
+                    1
+                </td>
+                <td class="text-success">A030277</td>
+                <td class="text-success">MSDU1-128GR</td>
+                <td class="text-success bg-table-warning text-right">
+                    <span class="canEdit">1</span>
+                    <input type="text" class="form-control" value="1"
+                        style="padding:6px;text-align: right;display: none;" placeholder="">
+                </td>
+                <td></td>
+                <td></td>
+                <td class="text-success"> 2019年10月01日</td>
+                <td class="text-success bg-table-warning">2019年10月01日</td>
+                <td class="text-success bg-table-warning">
+                    <span data-toggle="tooltip" data-bs-placement="top" title="2022/12/01:
+              契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、">2022/12/01:
+                        契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                </td>
+                <td class="text-success"> 2019年10月01日</td>
+                <td>
+                    <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                    <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()" style="display:none;">
+                        <img src="./assets/images/delete_danger.svg" />
+                    </a>
+                    <a href="#!" class="btnRervert" onclick="revertLicenseMaster()">
+                        <img src="./assets/images/revert_danger.svg" />
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td class="text-success">A030277</td>
+                <td class="text-success">MSDU1-128GR</td>
+                <td class="text-success bg-table-warning text-right">
+                    <span class="canEdit">1</span>
+                    <input type="text" class="form-control" value="1"
+                        style="padding:6px;text-align: right;display: none;" placeholder="">
+                </td>
+                <td></td>
+                <td></td>
+                <td class="text-success">2019年10月01日</td>
+                <td class="text-success bg-table-warning">
+                    <span class="canEdit">2019年10月01日</span>
+                    <input type="text" class="form-control date" style="padding:6px;display: none;" placeholder="年/月/日"
+                        readonly>
+                </td>
+                <td class="text-success bg-table-warning">
+                    <span class="canEdit" data-bs-placement="top" data-toggle="tooltip" title="2022/12/01:
+              契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、">2022/12/01:
+                        契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                    <input type="text" class="form-control" value="2022/12/01:
+                契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、" style="padding:6px;display: none;" placeholder="">
+                </td>
+                <td class="text-success">2019年10月01日</td>
+                <td>
+                    <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                    <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
+                        <img src="./assets/images/delete_danger.svg" />
+                    </a>
+                    <a href="#!" class="btnRervert" onclick="revertLicenseMaster()" style="display: none;">
+                        <img src="./assets/images/revert_danger.svg" />
+                    </a>
+                </td>
+            </tr>
+            <tr class="bg-table-danger">
+                <td>
+                    3
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-table-warning text-right">
+                    <span class="canEdit">1</span>
+                    <input type="text" class="form-control" value="1"
+                        style="padding:6px;text-align: right;display: none;" placeholder="">
+                </td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-table-warning">2019年10月01日</td>
+                <td class="bg-table-warning"></td>>2019年10月01日</td>
+                <td>
+                    <span data-bs-placement="top" data-toggle="tooltip" title="2022/12/01:
+              契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、">2022/12/01:
+                        契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                </td>
+                <td>2019年10月01日</td>
+                <td>
+                    <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                    <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()" style="display:none;">
+                        <img src="./assets/images/delete_danger.svg" />
+                    </a>
+                    <a href="#!" class="btnRervert" onclick="revertLicenseMaster()">
+                        <img src="./assets/images/revert_danger.svg" />
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4
+                </td>
+                <td>A030277</td>
+                <td>MSDU1-128GR</td>
+                <td class="bg-table-warning text-right">
+                    <span class="canEdit">1</span>
+                    <input type="text" class="form-control" value="1"
+                        style="padding:6px;text-align: right;display: none;" placeholder="">
+                </td>
+                <td>2019年10月01日</td>
+                <td>2019年10</td>
+                <td class="bg-table-warning">2019年10月01日</td>
+                <td class="bg-table-warning"></td>>2019年10月01日</td>
+                <td>
+                    <span data-bs-placement="top" data-toggle="tooltip" title="2022/12/01:
+              契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、">2022/12/01:
+                        契約により2022年10月からXXXX になって、契約により2022年10月からXXXX になって、</span>
+                </td>
+                <td>2019年10月01日</td>
+                <td>
+                    <input class="form-check-input" type="checkbox" value="">
+                </td>
+                <td>
+                    <a href="#!" class="btnRemove" onclick="deleteLicenseMaster()">
+                        <img src="./assets/images/delete_danger.svg" />
+                    </a>
+                    <a href="#!" class="btnRervert" onclick="revertLicenseMaster()" style="display: none;">
+                        <img src="./assets/images/revert_danger.svg" />
+                    </a>
+                </td>
+            </tr>
+
         </tbody>
+        <!-- <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <input type="text" class="form-control" placeholder="型番を入力">
+              <span class="material-icons" id="btnSearchContract">search</span>
+            </td>
+            <td>
+              <input type="text" class="form-control" placeholder="1" style="padding:6px;text-align: right;">
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="">
+            </td>
+            <td>
+              <a href="#!" class="btnRemoveForever" onclick="deleteForeverLicenseMaster()">
+                <img src="./assets/images/delete-forever.svg" />
+              </a>
+            </td>
+          </tr>
+        </tfoot> -->
     </table>
 
     <script type="text/javascript">
-        // Code By Webdevtrick ( https://webdevtrick.com )
-        const min = 150;
-        // The max (fr) values for grid-template-columns
-        const columnTypeToRatioMap = {
-            numeric: 1,
-            'text-short': 1.67,
-            'text-long': 3.33
-        };
 
-
-        const table = document.querySelector('table');
-
-
-        const columns = [];
-        let headerBeingResized;
-
-        // The next three functions are mouse event callbacks
-
-        // Where the magic happens. I.e. when they're actually resizing
-        const onMouseMove = e => requestAnimationFrame(() => {
-            console.log('onMouseMove');
-
-            // Calculate the desired width
-            horizontalScrollOffset = document.documentElement.scrollLeft;
-            const width = horizontalScrollOffset + e.clientX - headerBeingResized.offsetLeft;
-
-            // Update the column object with the new size value
-            const column = columns.find(({ header }) => header === headerBeingResized);
-            column.size = Math.max(min, width) + 'px'; // Enforce our minimum
-
-            // For the other headers which don't have a set width, fix it to their computed width
-            columns.forEach(column => {
-                if (column.size.startsWith('minmax')) {// isn't fixed yet (it would be a pixel value otherwise)
-                    column.size = parseInt(column.header.clientWidth, 10) + 'px';
-                }
-            });
-
-            /* 
-                  Update the column sizes
-                  Reminder: grid-template-columns sets the width for all columns in one value
-                */
-            table.style.gridTemplateColumns = columns.
-                map(({ header, size }) => size).
-                join(' ');
-        });
-
-        // Clean up event listeners, classes, etc.
-        const onMouseUp = () => {
-            console.log('onMouseUp');
-
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseup', onMouseUp);
-            headerBeingResized.classList.remove('header--being-resized');
-            headerBeingResized = null;
-        };
-
-        // Get ready, they're about to resize
-        const initResize = ({ target }) => {
-            console.log('initResize');
-
-            headerBeingResized = target.parentNode;
-            window.addEventListener('mousemove', onMouseMove);
-            window.addEventListener('mouseup', onMouseUp);
-            headerBeingResized.classList.add('header--being-resized');
-        };
-
-        // Let's populate that columns array and add listeners to the resize handles
-        document.querySelectorAll('th').forEach(header => {
-            const max = columnTypeToRatioMap[header.dataset.type] + 'fr';
-            columns.push({
-                header,
-                // The initial size value for grid-template-columns:
-                size: `minmax(${min}px, ${max})`
-            });
-
-            header.querySelector('.resize-handle').addEventListener('mousedown', initResize);
-        });
     </script>
 
 </body>
